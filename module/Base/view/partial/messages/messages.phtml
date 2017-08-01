@@ -1,0 +1,54 @@
+<?php
+/* @var $this \Zend\View\Renderer\PhpRenderer */
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
+?>
+
+<?php echo $this->flashMessenger()
+    ->setMessageOpenFormat('<div %s ><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>	<i class="icon fa fa-check"></i>')
+    ->setMessageCloseString('</div>')
+    ->renderCurrent(FlashMessenger::NAMESPACE_SUCCESS,
+        array("alert alert-success alert-dismissable")); ?>
+
+<?php echo $this->flashMessenger()
+    ->setMessageOpenFormat('<div %s style="margin-bottom: 5px">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+<i class="icon fa fa-warning"></i>
+')
+    ->setMessageSeparatorString('</div><div %s style="margin-bottom: 5px">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+<i class="icon fa fa-warning"></i>')
+    ->setMessageCloseString('</div>')
+    ->renderCurrent(FlashMessenger::NAMESPACE_ERROR,
+        array("alert alert-danger alert-dismissable")); ?>
+
+<?php echo $this->flashMessenger()
+    ->setMessageOpenFormat('<div %s ><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>	<i class="icon fa fa-info"></i>')
+    ->setMessageCloseString('</div>')
+    ->renderCurrent(FlashMessenger::NAMESPACE_INFO,
+        array("alert alert-info alert-dismissable")); ?>
+
+<?php echo $this->flashMessenger()
+    ->setMessageOpenFormat('<div %s ><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>	<i class="icon fa fa-warning"></i>')
+    ->setMessageCloseString('</div>')
+    ->renderCurrent(FlashMessenger::NAMESPACE_WARNING,
+        array("alert alert-warning alert-dismissable")); ?>
+
+
+<?php
+if($this->flashMessenger()->getPluginFlashMessenger()->getMessages(FlashMessenger::NAMESPACE_SUCCESS)){
+    $this->flashMessenger()->getPluginFlashMessenger()->clearMessagesFromNamespace(FlashMessenger::NAMESPACE_SUCCESS);
+}
+
+if($this->flashMessenger()->getPluginFlashMessenger()->getMessages(FlashMessenger::NAMESPACE_ERROR)){
+    $this->flashMessenger()->getPluginFlashMessenger()->clearMessagesFromNamespace(FlashMessenger::NAMESPACE_ERROR);;
+}
+
+if($this->flashMessenger()->getPluginFlashMessenger()->getMessages(FlashMessenger::NAMESPACE_INFO)){
+    $this->flashMessenger()->getPluginFlashMessenger()->clearMessagesFromNamespace(FlashMessenger::NAMESPACE_INFO);
+}
+
+if($this->flashMessenger()->getPluginFlashMessenger()->getMessages(FlashMessenger::NAMESPACE_WARNING)){
+    $this->flashMessenger()->getPluginFlashMessenger()->clearMessagesFromNamespace(FlashMessenger::NAMESPACE_WARNING);
+}
+
+?>

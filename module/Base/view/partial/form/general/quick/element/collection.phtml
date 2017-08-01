@@ -1,0 +1,11 @@
+<?php
+/** @var  $element Zend\Form\Element\Text*/
+$element = $this->element;
+$col_1 =  ($this->col_1) ? $this->col_1 : 'col-md-3';
+$col_2 =  ($this->col_2) ? $this->col_2 : 'col-md-6';
+
+?>
+<div class="form-group <?php if($this->formElementErrors($element)) echo " has-error" ?>">
+    <label><?php echo $element->getLabel();?></label>
+    <textarea class="form-control"  rows="<?php echo $element->getAttribute('rows');?>"  cols="<?php echo $element->getAttribute('cols');?>" placeholder="<?php echo $element->getAttribute('placeholder');?>" name="<?php echo $element->getAttribute('name');?>" ><?php echo $element->getValue()?></textarea>
+</div>

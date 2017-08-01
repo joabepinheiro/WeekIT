@@ -1,0 +1,69 @@
+<?php
+/** @var  $row \Acl\Entity\Role */
+$data = $this->data;
+?>
+
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-users font-green"></i>
+            <span class="caption-subject font-green bold uppercase"> Papeis</span>
+            <span class="caption-helper"></span>
+        </div>
+        <div class="actions">
+            <a href="<?php echo $this->url('acl-roles/default', array('action' => 'cadastrar'))?>" class="btn green ">
+                <i class="fa fa-plus" style="padding-right: 5px"></i> Novo
+            </a>
+
+            <a class="btn  btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+        </div>
+    </div>
+    <div class="portlet-body" style="height: auto;">
+        <?php echo $this->partial('partial/messages');?>
+
+        <table class="table table-hover table-light" id="sample_1">
+            <thead>
+            <tr>
+                <th>Papel</th>
+                <th>Herança</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($this->data as $entity): ?>
+                <tr>
+                    <td><?php echo $entity->getNome(); ?></td>
+                    <td><?php echo $entity->getParent(); ?></td>
+                    <td style="width: 30px;">
+                        <a href="<?php echo $this->url('acl-roles/default',
+                            array('action'=>'editar','id'=>$entity->getId())); ?>" class="btn btn-icon-only yellow-saffron">
+                            <i class="fa fa-pencil "></i>
+                        </a>
+                    </td>
+                    <td style="width: 30px;">
+                        <a href="<?php echo $this->url('acl-roles/default',
+                            array('action'=>'deletar','id'=>$entity->getId())); ?>" title="Deletar papel" class="btn btn-icon-only red">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

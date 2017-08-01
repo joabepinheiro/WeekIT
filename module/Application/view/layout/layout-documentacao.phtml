@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle($this->titulo)->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <?php echo $this->headMeta()
+    ->appendName('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no')
+    ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath('css/responsive.css'))
+        ->prependStylesheet($this->basePath('css/style.css'))
+
+        //AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load.
+        ->prependStylesheet($this->basePath('dist/css/skins/_all-skins.min.css'))
+        //Theme style
+        ->prependStylesheet($this->basePath('dist/css/AdminLTE.min.css'))
+        //Select2
+        ->prependStylesheet($this->basePath('plugins/select2/select2.min.css'))
+        // Bootstrap time Picker
+        ->prependStylesheet($this->basePath('plugins/timepicker/bootstrap-timepicker.min.css'))
+        //DataTables
+        ->prependStylesheet($this->basePath('plugins/datatables/dataTables.bootstrap.css'))
+        //Bootstrap Color Picker
+        ->prependStylesheet($this->basePath('plugins/colorpicker/bootstrap-colorpicker.min.css'))
+        //iCheck for checkboxes and radio inputs
+        ->prependStylesheet($this->basePath('plugins/iCheck/all.css'))
+        //daterange picker
+        ->prependStylesheet($this->basePath('plugins/daterangepicker/daterangepicker-bs3.css'))
+        //Ionicons
+        ->prependStylesheet($this->basePath('plugins/ionicons/ionicons.min.css'))
+        //Font Awesome
+        ->prependStylesheet($this->basePath('plugins/font-awesome/css/font-awesome.min.css'))
+         //Bootstrap 3.3.5
+        ->prependStylesheet($this->basePath('bootstrap/css/bootstrap.min.css'))
+    ?>
+    <!-- Scripts -->
+    <?php $this->headScript()
+        ->prependFile($this->basePath('js/docs.js'))
+        ->prependFile($this->basePath('js/scripts.js'))
+        //Jquery Form
+        ->prependFile($this->basePath('js/jquery.form.js'))
+        //AdminLTE for demo purposes
+        ->prependFile($this->basePath('dist/js/demo.js'))
+        //AdminLTE App
+        ->prependFile($this->basePath('dist/js/app.min.js'))
+        // iCheck 1.0.1
+        ->prependFile($this->basePath('plugins/iCheck/icheck.min.js'))
+        // FastClick
+        ->prependFile($this->basePath('plugins/fastclick/fastclick.min.js'))
+        //SlimScroll
+        ->prependFile($this->basePath('plugins/slimScroll/jquery.slimscroll.min.js'))
+        //  DataTables
+        ->prependFile($this->basePath('plugins/datatables/dataTables.bootstrap.min.js'))
+        ->prependFile($this->basePath('plugins/datatables/jquery.dataTables.min.js'))
+        // bootstrap time picker
+        ->prependFile($this->basePath('plugins/timepicker/bootstrap-timepicker.min.js'))
+        //bootstrap color picker
+        ->prependFile($this->basePath('plugins/colorpicker/bootstrap-colorpicker.min.js'))
+        //date-range-picker
+        ->prependFile($this->basePath('plugins/daterangepicker/daterangepicker.js'))
+        ->prependFile($this->basePath('plugins/moment/moment.min.js'))
+        //InputMask
+        ->prependFile($this->basePath('plugins/input-mask/jquery.inputmask.extensions.js'))
+        ->prependFile($this->basePath('plugins/input-mask/jquery.inputmask.date.extensions.js'))
+        ->prependFile($this->basePath('plugins/input-mask/jquery.inputmask.js'))
+        //Select2
+        ->prependFile($this->basePath('plugins/select2/select2.full.min.js'))
+        //Bootstrap 3.3.5
+        ->prependFile($this->basePath('bootstrap/js/bootstrap.min.js'))
+        //jQuery 2.1.4
+        ->prependFile($this->basePath('plugins/jQuery/jQuery-2.1.4.min.js'))
+        //  HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+        //WARNING: Respond.js doesn't work if you view the page via file://
+        ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+        ->prependFile($this->basePath('js/html5shiv.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+    ?>
+    <script type="text/javascript">
+        function carregando(){
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('body').style.overflow = 'hidden';
+        }
+    </script>
+</head>
+<body class="skin-blue fixed" data-spy="scroll" data-target="#scrollspy">
+
+<div id="overlay" class="overlay" style="width: 100%; height:100%; position: absolute; background: rgba(195, 195, 195, 0.58); z-index: 99999999999; display: none;">
+    <i class="fa fa-refresh fa-3x fa-spin" style="text-align: center; left: 50%; top: 40%;position: absolute;"></i>
+</div>
+
+<!-- Site wrapper -->
+<div class="wrapper">
+    <?php echo $this->partial('partial/main-header'); ?>
+    <!-- =============================================== -->
+    <!-- Left side column. contains the sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div class="sidebar" id="scrollspy">
+
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="nav sidebar-menu">
+                <li class="header">ASSUNTOS</li>
+                <li class="active"><a href="#introduction"><i class="fa fa-circle-o"></i> Introduction</a></li>
+                <li class="active"><a href="#introduction2"><i class="fa fa-circle-o"></i> Introduction</a></li>
+                <li class="active"><a href="#introduction3"><i class="fa fa-circle-o"></i> Introduction</a></li>
+                <li class="active"><a href="#introduction4"><i class="fa fa-circle-o"></i> Introduction</a></li>
+                <li class="active"><a href="#introduction5"><i class="fa fa-circle-o"></i> Introduction</a></li>
+                <li class="active"><a href="#introduction6"><i class="fa fa-circle-o"></i> Introduction</a></li>
+                <li class="active"><a href="#introduction7"><i class="fa fa-circle-o"></i> Introduction</a></li>
+                <li class="active"><a href="#introduction8"><i class="fa fa-circle-o"></i> Introduction</a></li>
+
+            </ul>
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <?php echo  $this->titulo; ?>
+                <small><?php echo  $this->sub_titulo; ?></small>
+            </h1>
+            <?php
+            echo $this->navigation('navigation')
+                ->breadcrumbs()
+                ->setMinDepth(0)
+                ->setPartial('partial/breadcrumb');
+            ?>
+
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <?php echo $this->layout()->content; ?>
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+
+    <footer class="main-footer" style="margin-left: 0px; padding: 15px 15px 35px 15px">
+        <div class="pull-right hidden-xs">
+            <b>Versão</b> beta
+        </div>
+        <div class="pull-left hidden-xs">
+            &copy; 2015- <?php echo date('Y')?> <strong> Átomo Tecnologia</strong>. Todos os direitos reservados.
+        </div>
+    </footer>
+
+   <?php echo $this->partial('partial/control-sidebar'); ?>
+</div><!-- ./wrapper -->
+
+
+<?php echo $this->headScript(); ?>
+<?php echo $this->inlineScript(); ?>
+</body>
+</html>

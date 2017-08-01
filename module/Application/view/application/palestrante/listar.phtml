@@ -1,0 +1,58 @@
+<?php
+/** @var  $row \Application\Entity\Palestrante */
+$data = $this->data;
+?>
+
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-user font-green" aria-hidden="true"></i>
+            <span class="caption-subject font-green bold uppercase"> Palestrantes</span>
+            <span class="caption-helper"></span>
+        </div>
+        <div class="actions">
+            <a href="<?php echo $this->url('palestrante/default', array('action' => 'cadastrar'))?>" class="btn green ">
+                <i class="fa fa-plus" style="padding-right: 5px"></i> Novo
+            </a>
+
+            <a class="btn  btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+        </div>
+    </div>
+    <div class="portlet-body" style="height: auto;">
+        <?php echo $this->partial('partial/messages');?>
+
+        <table class="table table-hover table-light" id="sample_1">
+            <thead>
+            <tr>
+                <th>Descrição</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($data as $row): ?>
+                <tr>
+                    <td><?php echo $row->getDescricao(); ?></td>
+                    <td style=" text-align: right;">
+                        <div class="clearfix">
+                            <a href="<?php  echo $this->url('palestrante/default', array('action' => 'editar', 'id' => $row->getId()));?>" class="btn btn-icon-only yellow-saffron" title="Editar">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+
+                            <a href="<?php  echo $this->url('palestrante/default', array('action' => 'detalhes', 'id' => $row->getId()));?>" class="btn btn-icon-only blue-sharp" title="Detalhes para <?php echo$row->getDescricao();  ?>">
+                                <i class="fa fa-info" aria-hidden="true"></i>
+                            </a>
+
+                            <a href="<?php  echo $this->url('palestrante/default', array('action' => 'deletar', 'id' => $row->getId()));?>" class="btn btn-icon-only red-mint" title="Excluir palestrante" onclick="return confirm('Confirmar exclusão de <?php echo $row->getDescricao(); ?>');">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </div>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+
+

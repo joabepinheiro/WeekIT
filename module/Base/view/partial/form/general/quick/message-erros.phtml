@@ -1,0 +1,13 @@
+<?php
+/** @var  $element Zend\Form\Element\Text*/
+$element = $this->element;
+?>
+
+<?php
+if ($this->formElementErrors ($element ))
+    echo $this->formElementErrors()
+        ->setMessageOpenFormat('<small data-bv-validator="notEmpty" class="help-block" style="">')
+        ->setMessageSeparatorString('</small><small data-bv-validator="notEmpty" class="help-block" style="">')
+        ->setMessageCloseString('</small>')
+        ->render($element);
+?>

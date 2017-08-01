@@ -1,0 +1,28 @@
+<?php
+/** @var  Base\Form\FormAbstract $form*/
+/** @var  Zend\Form\Element $element */
+$form           = $this->form;
+$col_1 =  ($this->col_1) ? $this->col_1 : 'col-md-3';
+$col_2 =  ($this->col_2) ? $this->col_2 : 'col-md-6';
+?>
+<!-- form start -->
+<?php $form->setAttribute('class', 'form-horizontal'); ?>
+<?php $form->prepare();
+?>
+
+<?php echo $this->form()->openTag($form); ?>
+
+        <?php
+        foreach($form->getElements() as $element):
+            $type = $element->getAttribute('type');
+            echo $this->partial('partial/form/general/quick/element/'.$type, array(
+                'element' => $element,
+                'col_1' => $col_1,
+                'col_2' => $col_2,
+                'edit'  => $this->edit
+            ));
+         endforeach;
+        ?>
+</form>
+
+

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('Átomo Co-work ICMS - Login')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath('css/style-auth.css'))
+        ->prependStylesheet($this->basePath('css/style.css'))
+
+        ->prependStylesheet($this->basePath('plugins/iCheck/square/blue.css'))
+        //Theme style
+        ->prependStylesheet($this->basePath('dist/css/AdminLTE.min.css'))
+
+        //Ionicons
+        ->prependStylesheet($this->basePath('plugins/ionicons/ionicons.min.css'))
+
+        //Font Awesome
+        ->prependStylesheet($this->basePath('plugins/font-awesome/css/font-awesome.min.css'))
+
+        //Bootstrap 3.3.5
+        ->prependStylesheet($this->basePath('bootstrap/css/bootstrap.min.css'))
+
+        //iCheck for checkboxes and radio inputs
+        ->prependStylesheet($this->basePath('plugins/iCheck/all.css'))
+
+
+
+    ?>
+    <!-- Scripts -->
+    <?php $this->headScript()
+
+        //SlimScroll
+        ->prependFile($this->basePath('plugins/iCheck/icheck.min.js'))
+        //Bootstrap 3.3.5
+        ->prependFile($this->basePath('bootstrap/js/bootstrap.min.js'))
+        //jQuery 2.1.4
+        ->prependFile($this->basePath('plugins/jQuery/jQuery-2.1.4.min.js'))
+        //  HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+        //WARNING: Respond.js doesn't work if you view the page via file://
+        ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+        ->prependFile($this->basePath('js/html5shiv.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+    ?>
+    <?php
+    $form = $this->form;
+    ?>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <a href="../../index2.html"><b>Átomo Co-work ICMS</b></a>
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Faça login para começar a sua sessão</p>
+
+        <?php if($this->menssages):?>
+            <div class="alert alert-danger alert-bold-border fade in alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <?php echo $this->menssages; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php echo $this->form()->openTag($form) ?>
+            <?php echo $this->formElement($form->get('csrf')); ?>
+            <div class="form-group has-feedback <?php if($this->formElementErrors($form->get('email'))) echo " has-error" ?>">
+                <?php echo $this->formElement($form->get('email')); ?>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+                <?php
+                if ($this->formElementErrors ($form->get('email') ))
+                    echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small data-bv-validator="notEmpty" class="help-block" style="">')
+                        ->setMessageSeparatorString('</small><small data-bv-validator="notEmpty" class="help-block" style="">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('email'));
+                ?>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+
+                </div><!-- /.col -->
+                <div class="col-xs-6">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Recuperar senha</button>
+                </div><!-- /.col -->
+            </div>
+        </form>
+
+    </div><!-- /.login-box-body -->
+</div><!-- /.login-box -->
+<?php echo $this->headScript(); ?>
+<?php echo $this->inlineScript(); ?>
+
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<?php
+/** @var  $row \Application\Entity\Monitor */
+$data = $this->data;
+?>
+
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-users font-green"></i>
+            <span class="caption-subject font-green bold uppercase"> Monitor</span>
+            <span class="caption-helper"></span>
+        </div>
+        <div class="actions">
+            <a href="<?php echo $this->url('monitor/default', array('action' => 'cadastrar'))?>" class="btn green ">
+                <i class="fa fa-plus" style="padding-right: 5px"></i> Novo
+            </a>
+
+            <a class="btn  btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+        </div>
+    </div>
+    <div class="portlet-body" style="height: auto;">
+        <?php echo $this->partial('partial/messages');?>
+
+        <table class="table table-hover table-light" id="sample_1">
+            <thead>
+            <tr>
+                <th>Monitor</th>
+                <th>Evento</th>
+                <th>Cadastrado em</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($data as $row): ?>
+                <tr>
+                    <td><?php echo $row->getParticipante(); ?></td>
+                    <td><?php echo $row->getEvento(); ?></td>
+                    <td><?php echo $row->getCadastradoEm()->format('d/m/Y h:i:s'); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+
+

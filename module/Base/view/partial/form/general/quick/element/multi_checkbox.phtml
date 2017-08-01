@@ -1,0 +1,15 @@
+<?php
+/** @var  $element Zend\Form\Element\Email*/
+$element = $this->element;
+$col_1 =  ($this->col_1) ? $this->col_1 : 'col-md-3';
+$col_2 =  ($this->col_2) ? $this->col_2 : 'col-md-6';
+?>
+
+
+<div class="form-group <?php if($this->formElementErrors($element)) echo " has-error" ?>">
+    <h3 class="display-block"><?php echo $element->getOptions()['label'];?> </h3>
+    <?php echo $this->formMultiCheckbox($element); ?>
+    <?php echo $this->partial('partial/form/general/quick/message-erros', array(
+        'element' => $element
+    ))?>
+</div>

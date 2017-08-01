@@ -1,0 +1,16 @@
+<?php
+/** @var  $element Zend\Form\Element\File*/
+$element = $this->element;
+$col_1 =  ($this->col_1) ? $this->col_1 : 'col-md-3';
+$col_2 =  ($this->col_2) ? $this->col_2 : 'col-md-6';
+?>
+
+<div class="form-group <?php if($this->formElementErrors($element)) echo " has-error" ?>">
+    <label for="<?php echo $element->getAttribute('id');?>">
+        <?php echo $element->getLabel();?>
+    </label>
+    <input type="file" id="<?php echo $element->getAttribute('id');?>" name="<?php echo $element->getName(); ?>" value="<?php echo $element->getValue()?>">
+    <p class="help-block"><?php echo $element->getAttribute('help-block');?></p>
+</div>
+
+

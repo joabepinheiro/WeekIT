@@ -1,0 +1,84 @@
+<?php /* @var $this \Zend\View\Renderer\PhpRenderer */?>
+<?php
+$form = $this->form;
+$row  = $this->row;
+$rote = $this->rote;
+$maps = array();
+
+foreach($row->toArray() as $value){
+    if(is_object($value)){
+        if(is_a($value, 'Doctrine\ORM\PersistentCollection')){
+            array_push($maps, $value);
+        }
+    }
+}
+
+$form->setAttribute('action', $this->url($rote, array('action'=>'deletar', 'id'=>$row->getId())));
+$form->prepare();
+?>
+
+
+
+
+
+
+
+
+
+
+<div class="box box-default">
+    <div class="box-body">
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-trash"></i> Deseja deletar <?php echo $row;?> ?</h4>
+            Atenção ao deletar <?php echo $row; ?> ele será perdido permanentemente
+        </div>
+
+        <form role="form" name="<?php echo $form->getName()?>" method="<?php echo $form->getAttribute('method'); ?>">
+            <?php
+            echo $this->partial('partial/form/general/quick/element/'.$form->get('id')->getAttribute('type'), array(
+                'element' => $form->get('id'),
+            ));
+
+            echo $this->formElement( $form->get('csrf'));
+            ?>
+
+            <?php /** @var $map Doctrine\ORM\PersistentCollection */?>
+            <?php foreach($maps as $map):?>
+                <?php if($map->getMapping()['isCascadePersist'] && count($map->toArray()) > 0 ):?>
+                        <div class="box box-danger">
+                            <div class="box-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Todos os registros <span class="text-danger"><?php echo $map[0]->getVerboseName();?></span> abaixo serão removidos</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($map as $row): ?>
+                                        <tr>
+                                            <td><?php echo $row?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tfoot>
+                                </table>
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                 <?php endif;?>
+            <?php endforeach; ?>
+
+            <div class="form-group">
+                <div class="col-lg-12">
+                    <div class="btn-group pull-left">
+                        <button type="submit" class="btn" name='result' value="nao">Cancelar</button>
+                    </div>
+
+                    <div class="btn-group pull-right">
+                        <button type="submit" class="btn btn-danger" name='result' value="sim" title="Ao clicar em deletar o registro será deletado permanentemente e não poderá ser recuperado">Deletar</button>
+                    </div>
+                </div>
+            </div>
+         </form>
+
+    </div><!-- /.box-body -->
+</div>

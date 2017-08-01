@@ -1,0 +1,25 @@
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-users font-green"></i>
+            <span class="caption-subject font-green bold uppercase"> Cadastrar seção</span>
+            <span class="caption-helper"></span>
+        </div>
+        <div class="actions">
+            <a href="<?php echo $this->url('secao/default', array('action' => 'listar'))?>" class="btn green ">
+                <i class="fa fa-list" style="padding-right: 5px"></i> Listar
+            </a>
+
+            <a class="btn  btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+        </div>
+    </div>
+    <div class="portlet-body" style="height: auto;">
+        <?php echo $this->partial('partial/messages');?>
+        <?php
+        echo $this->partial('partial/form/general/quick', array(
+            'form' => $form,
+        ));
+        ?>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<?php
+/** @var  $element Zend\Form\Element\Email*/
+$element = $this->element;
+$col_1 =  ($this->col_1) ? $this->col_1 : 'col-md-3';
+$col_2 =  ($this->col_2) ? $this->col_2 : 'col-md-6';
+
+echo $this->partial('partial/form/general/quick/element/'.$element->getAttribute('type'), array(
+'element' => $element,
+));

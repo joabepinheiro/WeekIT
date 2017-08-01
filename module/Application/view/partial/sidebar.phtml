@@ -1,0 +1,16 @@
+<?php
+/** @var $this \Zend\View\Renderer\PhpRenderer */
+
+/**
+ * Exibe o menu de arcordo o tipo de usuário logado
+ */
+
+$container  = new \Zend\Session\Container('logado');
+$tipo    = $container->offsetGet('usuario')['tipo'];
+
+echo $this->partial('partial/'.$tipo.'/sidebar');
+
+
+
+
+

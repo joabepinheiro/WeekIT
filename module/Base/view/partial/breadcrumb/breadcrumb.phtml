@@ -1,0 +1,32 @@
+<ol class="breadcrumb" style="        /* float: left; */
+    background: transparent;
+    /* margin-top: 30px; */
+    /* margin-bottom: 20px; */
+    /* font-size: 12px; */
+    padding: 7px 5px;
+    /* position: absolute; */
+    /* top: 15px; */
+    /* left: 10px; */
+    /* border-radius: 2px; */">
+    <?php  foreach ($this->pages as $key => $page):?>
+        <li>
+            <?php if ($page->getRoute() == 'home'): ?>
+                <a href="/"><i class="fa fa-home"></i>Home</a>
+            <?php else:?>
+                <a href="<?php echo $page->getHref(); ?>"><?php echo $page->getLabel(); ?></a>
+            <?php endif;?>
+        </li>
+    <?php endforeach; ?>
+</ol>
+
+
+<?php if(count($this->pages)>1): ?>
+    <ol  class="voltar">
+        <li>
+            <a href="javascript:history.go(-1)">
+                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Voltar
+            </a>
+        </li>
+    </ol>
+<?php endif; ?>
+

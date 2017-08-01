@@ -1,0 +1,86 @@
+<?php
+/** @var  $row \Application\Entity\Evento */
+/** @var  $inscricao \Application\Entity\Inscricao */
+$data = $this->data;
+$eventos = $this->eventos;
+$minhas_inscricoes = $this->minhas_inscricoes;
+
+?>
+
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-calendar font-green"></i>
+            <span class="caption-subject font-green bold uppercase"> Eventos</span>
+            <span class="caption-helper"></span>
+        </div>
+    </div>
+    <div class="portlet-body" style="height: auto;">
+        <?php echo $this->partial('partial/messages');?>
+
+        <table class="table table-hover table-light" id="sample_1">
+            <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Data</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($eventos as $row): ?>
+                <tr title="<?php echo $row->getTitulo(); ?>">
+                    <td><?php echo $row->getTitulo(); ?></td>
+                    <td>
+                        De <?php echo $row->getInicio()->format('d/m/Y h:i'); ?> até
+                        <?php echo $row->getFim()->format('h:i'); ?>
+                    </td>
+                    <td>
+                        <a href="<?php echo $this->url('inscricao/default', array('action' => 'cadastrar', 'evento' => $row->getId()))?>" class="btn btn-sm green" title="Inscrever-se em <?php echo $row->getTitulo(); ?>">
+                            <i class="fa fa-plus green"></i> Inscrever
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-list-alt font-green"></i>
+            <span class="caption-subject font-green bold uppercase"> Minhas inscrições</span>
+            <span class="caption-helper"></span>
+        </div>
+    </div>
+    <div class="portlet-body" style="height: auto;">
+        <?php echo $this->partial('partial/messages');?>
+
+        <table class="table table-hover table-light" id="sample_1">
+            <thead>
+            <tr>
+                <th>Mini curso</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($minhas_inscricoes as $inscricao): ?>
+                <tr title="<?php echo $inscricao->getEvento(); ?>">
+                    <td><?php echo $inscricao->getEvento(); ?></td>
+                    <td><?php echo $inscricao->getStatus(); ?></td>
+                    <td>
+                        <?php if($inscricao->getStatus() == 'andamento'):?>
+                            <a href="<?php echo $this->url('inscricao/default', array('action' => 'deletar', 'id' => $row->getId()))?>" class="btn btn-sm red-mint" title="Inscrever-se em <?php echo $row->getTitulo(); ?>">
+                                Remover
+                            </a>
+                        <?php endif;?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
