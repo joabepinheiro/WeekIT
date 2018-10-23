@@ -1,0 +1,36 @@
+.font-weight-light {
+    font-weight: 300 !important;
+}
+
+html, body{
+	font-weight: 400;
+	color: #666;
+}
+
+
+.alert.m-alert--outline.alert-primary {
+    background-color: #ffffff;
+    border-color: #00710a;
+    color: #00710a;
+    font-weight: 500;
+
+}
+
+.alert.m-alert--outline.alert-primary .m-alert__icon i {
+    color: #00710a;
+}
+
+.cancelado{
+    background-color: #f4516c;
+    color: #ffffff;
+}
+
+.pago{
+    background-color: #158d29 !important;
+    color: #ffffff !important;
+}
+
+.andamento{
+    background-color: #ffb822 !important;
+    color: #111111 !important;
+}

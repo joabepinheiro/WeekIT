@@ -1,0 +1,1 @@
+  {{ Form::select($key, $value['options'], old($key), ['name' => $key,'class' => $class, 'id' => $value['id'] ?? '', 'placeholder'   => $value['placeholder'] ?? '', $value['attr'] ?? '', $value['required'] ?? '']) }}
