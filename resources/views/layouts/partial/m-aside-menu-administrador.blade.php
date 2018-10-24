@@ -89,11 +89,11 @@
                 </div>
             </li>
 
-            <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel {{ request()->is('evento/*') ? ' m-menu__item--active' : '' }}"  m-menu-submenu-toggle="click" aria-haspopup="true">
-                <a  href="{{route('evento.index')}}" class="m-menu__link m-menu__toggle">
+            <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel {{ request()->is('atividade/*') ? ' m-menu__item--active' : '' }}"  m-menu-submenu-toggle="click" aria-haspopup="true">
+                <a  href="{{route('atividade.index')}}" class="m-menu__link m-menu__toggle">
                     <span class="m-menu__item-here"></span>
                     <span class="m-menu__link-text">
-                        Eventos
+                        Atividades
                     </span>
                     <i class="m-menu__hor-arrow la la-angle-down"></i>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -102,23 +102,23 @@
                     <span class="m-menu__arrow m-menu__arrow--adjust"></span>
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item "  aria-haspopup="true">
-                            <a  href="{{route('evento.create')}}" class="m-menu__link ">
+                            <a  href="{{route('atividade.create')}}" class="m-menu__link ">
                                 <i class="m-menu__link-icon flaticon-add"></i>
                                 <span class="m-menu__link-title">
                                     <span class="m-menu__link-wrap">
                                         <span class="m-menu__link-text">
-                                            Cadastrar evento
+                                            Cadastrar atividade
                                     </span>
                                 </span>
                             </a>
                         </li>
                         <li class="m-menu__item "  aria-haspopup="true">
-                            <a  href="{{route('evento.index')}}" class="m-menu__link ">
+                            <a  href="{{route('atividade.index')}}" class="m-menu__link ">
                                 <i class="m-menu__link-icon flaticon-list"></i>
                                 <span class="m-menu__link-title">
                                     <span class="m-menu__link-wrap">
                                         <span class="m-menu__link-text">
-                                            Listar eventos
+                                            Listar atividades
                                     </span>
                                 </span>
                             </a>

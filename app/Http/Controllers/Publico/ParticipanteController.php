@@ -35,6 +35,7 @@ class ParticipanteController extends AbstractController
         $route = redirect()->route('publico.participante.create');
 
         if(!is_null($entity)){
+            $route = redirect()->route('login');
             return $route->with('success','Seu cadastrado foi efetuado com sucesso');
         }
 

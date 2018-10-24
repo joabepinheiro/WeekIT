@@ -2,28 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ParticipanteRequest;
+use App\Http\Requests\AtividadeRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ParticipanteController extends AbstractController
+class AtividadeController extends AbstractController
 {
     /**
-     * @var $model \App\Participante
+     * @var $model \App\Atividade
      */
-    protected $model            = '\App\Participante';
-    protected $base_name_route  = 'participante';
+    protected $model            = '\App\Atividade';
+    protected $base_name_route  = 'atividade';
 
     /**
-     * @param ParticipanteRequest $request
+     * @param AtividadeRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ParticipanteRequest $request)
+    public function store(AtividadeRequest $request)
     {
         $input = $request->all();
         $entity = $this->model::insert($input);
-
         $route = redirect()->route($this->base_name_route.'.show', ['id' => $entity->id]);
 
         if(!is_null($entity)){
@@ -34,10 +33,10 @@ class ParticipanteController extends AbstractController
     }
 
     /**
-     * @param ParticipanteRequest $request
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
     */
-    public function update(ParticipanteRequest $request)
+    public function update(AtividadeRequest $request)
     {
         $entity = $this->model::find($request->input('id'));
         $route  = redirect()->route($this->model::$base_name_route.'.edit', ['id' => $request->input('id')] );
@@ -46,16 +45,5 @@ class ParticipanteController extends AbstractController
             return $route->with('success', $entity.'  atualizado com sucesso');
 
         return $route->with('warning', 'Ops, algo deu errado');
-    }
-
-    public function recuperarSenha(){
-        return view('participante.recuperar-senha');
-    }
-
-    public function enviarEmailRecuperacao(\App\Http\Requests\RecuperacaContaRequest $request){
-
-            $email = $request->input('email');
-
-            \App\Participante::enviarEmailRecuperacao($email);
     }
 }

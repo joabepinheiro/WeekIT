@@ -35,54 +35,49 @@ class Evento extends AbstractModel implements DefaultModel
         $query =  DB::table('evento')
            ->select([
                 'evento.id as id',
-                'evento.identificador as identificador',
-                'evento.titulo as titulo',
-                 DB::raw('CONCAT(DATE_FORMAT(evento.hora_inicio,"%H:%i"), " - ", DATE_FORMAT(evento.hora_fim,"%H:%i")) AS horario'),
-                 DB::raw('DATE_FORMAT(evento.data_inicio,"%d/%m/%Y") as  data_do_curso'),
+                'evento.nome as nome',
+                'evento.sigla as sigla',
+                'evento.ano as ano',
+                'evento.edicao as edicao',
                 'evento.data_inicio as data_inicio',
-                'evento.hora_inicio as hora_inicio',
                 'evento.data_fim as data_fim',
-                'evento.hora_fim as hora_fim',
-                'evento.carga_horaria as carga_horaria',
-                'evento.maximo_participantes as maximo_participantes',
-                'evento.preco as preco',
-                'evento.tipo as tipo',
-                'evento.local_id as local_id',
+                'evento.data_inicio_inscricao as data_inicio_inscricao',
+                'evento.data_fim_inscricao as data_fim_inscricao',
 
+                DB::raw('DATE_FORMAT(evento.data_inicio,"%d/%m/%Y %H:%i:%s") as data_inicio_br'),
+                DB::raw('DATE_FORMAT(evento.data_fim,"%d/%m/%Y %H:%i:%s") as data_fim_br'),
                 DB::raw('DATE_FORMAT(evento.created_at,"%d/%m/%Y %H:%i:%s") as created_at'),
                 DB::raw('DATE_FORMAT(evento.updated_at,"%d/%m/%Y %H:%i:%s") as updated_at'),
             ]);
 
-        $query->join('local', 'local.id', '=', 'evento.local_id');
 
-        if(isset($request_query['descricao'])){
-            if(!empty($request_query['descricao'])){
-                $query->where('evento.descricao', 'like', '%'.$request_query['descricao'].'%');
+        if(isset($request_query['nome'])){
+            if(!empty($request_query['nome'])){
+                $query->where('evento.nome', 'like', '%'.$request_query['nome'].'%');
             }
         }
 
-        if(isset($request_query['titulo'])){
-            if(!empty($request_query['titulo'])){
-                $query->where('evento.titulo', 'like', '%'.$request_query['titulo'].'%');
+        if(isset($request_query['edicao'])){
+            if(!empty($request_query['edicao'])){
+                $query->where('evento.edicao', 'like', '%'.$request_query['edicao'].'%');
             }
         }
 
-        if(isset($request_query['identificador'])){
-            if(!empty($request_query['identificador'])){
-                $query->where('evento.identificador', 'like', '%'.$request_query['identificador'].'%');
+        if(isset($request_query['sigla'])){
+            if(!empty($request_query['sigla'])){
+                $query->where('evento.sigla', 'like', '%'.$request_query['sigla'].'%');
             }
         }
 
-        if(isset($request_query['local_id'])){
-            if(!empty($request_query['local_id'])){
-                $query->where('evento.local_id', '=', $request_query['local_id']);
+        if(isset($request_query['data_inicio'])){
+            if(!empty($request_query['data_inicio'])){
+                $query->where('evento.data_inicio', '=', $request_query['data_inicio']);
             }
         }
 
         if(isset($sort)){
             $query->orderBy($sort['field'],$sort['sort']);
         }
-
 
         $paginator  = $query->paginate($perpage, $columns, 'page', $page);
 
@@ -107,24 +102,31 @@ class Evento extends AbstractModel implements DefaultModel
 
         $columns = [
             [
-                'field' => 'identificador',
-                'title' => 'Identificador',
+                'field' => 'nome',
+                'title' => 'Nome',
             ],[
-                'field' => 'titulo',
-                'title' => 'Título',
+                'field' => 'sigla',
+                'title' => 'Sigla',
             ],[
-                'field' => 'data_do_curso',
-                'title' => 'Data',
+                'field' => 'ano',
+                'title' => 'Ano',
             ],[
-                'field' => 'horario',
-                'title' => 'Horário',
+                'field' => 'edicao',
+                'title' => 'Edição',
             ],
             [
-                'field' => 'carga_horaria',
-                'title' => 'Carga horária',
+                'field' => 'data_inicio_br',
+                'title' => 'Início',
             ], [
-                'field' => 'maximo_participantes',
-                'title' => 'Max. Participantes',
+                'field' => 'data_fim_br',
+                'title' => 'Fim',
+            ],
+            [
+                'field' => 'data_inicio_br',
+                'title' => 'Inicio das inscrições',
+            ], [
+                'field' => 'data_fim_br',
+                'title' => 'Fim das inscrições',
             ],
         ];
 
@@ -135,17 +137,21 @@ class Evento extends AbstractModel implements DefaultModel
 
         return  [
             'fields' =>[
-                'titulo' => [
+
+
+                'nome' => [
                     'type'          => 'text',
-                    'placeholder'   => 'Título',
+                    'placeholder'   => 'Nome',
                 ],
-                'local_id' => [
-                    'type'          => 'select',
-                    'options'       => Local::select('descricao', 'id')->pluck('descricao', 'id'),
-                    'label'         => 'Local',
-                    'placeholder'   => 'Local',
-                    'required'      => 'required',
+                'data_inicio' => [
+                    'type'          => 'date',
+                    'placeholder'   => 'Inicio',
                 ],
+                'data_fim' => [
+                    'type'          => 'date',
+                    'placeholder'   => 'Fim',
+                ],
+
             ]
         ];
     }
@@ -154,30 +160,36 @@ class Evento extends AbstractModel implements DefaultModel
 
         return  [
             'fields' =>[
+
                 [
-                    'local_id' => [
-                        'type'          =>  'select',
-                        'options' => Local::pluck('descricao', 'id'),
-                        'label'         => 'Local',
-                        'placeholder'   => 'Local',
-                        'required'      => 'required',
-                    ],
-                ],
-                [
-                    'identificador' => [
+                    'nome' => [
                         'type'          => 'text',
-                        'label'         => 'Identificador',
-                        'placeholder'   => 'Identificador',
+                        'label'         => 'Nome',
+                        'placeholder'   => 'Nome',
                         'required'      => 'required',
                     ],
 
-                    'titulo' => [
+                    'sigla' => [
                         'type'          => 'text',
-                        'label'         => 'Título',
-                        'placeholder'   => 'Título',
+                        'label'         => 'Sigla',
+                        'placeholder'   => 'Sigla',
                         'required'      => 'required',
                     ],
                 ],   
+                [
+                    'ano' => [
+                        'type'          => 'number',
+                        'label'         => 'Ano',
+                        'placeholder'   => 'Ano',
+                        'required'      => 'required',
+                    ],
+                    'edicao' => [
+                        'type'          => 'number',
+                        'label'         => 'Edição',
+                        'placeholder'   => 'Edição',
+                        'required'      => 'required',
+                    ],
+                ],
                 [
                     'data_inicio' => [
                         'type'          => 'date',
@@ -207,38 +219,30 @@ class Evento extends AbstractModel implements DefaultModel
                     ],
                 ],
                 [
-                    'carga_horaria' => [
-                        'type'          => 'number',
-                        'label'         => 'Carga horária',
-                        'placeholder'   => 'Carga horária',
+                    'data_inicio_inscricao' => [
+                        'type'          => 'date',
+                        'label'         => 'Início da inscrição',
+                        'placeholder'   => 'Início  da inscrição',
                         'required'      => 'required',
                     ],
-
-                    'maximo_participantes' => [
-                        'type'          =>  'number',
-                        'label'         => 'Max. de participantes',
-                        'placeholder'   => 'Max. de participantes',
+                    'hora_inicio_inscricao' => [
+                        'type'          => 'time',
+                        'label'         => 'Hora início da inscrição',
+                        'placeholder'   => 'Hora Início da inscrição',
                         'required'      => 'required',
                     ],
-
-
                 ],
                 [
-                    'preco' => [
-                        'type'          =>  'number',
-                        'label'         => 'Preço',
-                        'placeholder'   => 'Preço',
+                    'data_fim_inscricao' => [
+                        'type'          =>  'date',
+                        'label'         => 'Fim da inscrição',
+                        'placeholder'   => 'Fim da inscrição',
                         'required'      => 'required',
-                        'attr' => 'step=".01"'
                     ],
-                    'tipo' => [
-                        'type'          =>  'select',
-                        'options' => [
-                            'palestra' => 'palestra',
-                            'minicurso' => 'minicurso'
-                        ],
-                        'label'         => 'Tipo',
-                        'placeholder'   => 'Tipo',
+                    'hora_fim_inscricao' => [
+                        'type'          => 'time',
+                        'label'         => 'Hora fim da inscrição',
+                        'placeholder'   => 'Hora fim da inscrição',
                         'required'      => 'required',
                     ],
                 ],
@@ -258,7 +262,12 @@ class Evento extends AbstractModel implements DefaultModel
 
     public function __toString()
     {
-        return $this->titulo;
+        return $this->nome;
+    }
+
+    public static function  eventoPadrao(){
+
+        return session()->get('evento_id');
     }
 
 }

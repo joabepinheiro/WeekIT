@@ -43,7 +43,13 @@
 
                     
 
-                    <form class="m-login__form m-form mt-0" method="POST"  action="{{ route('login') }}">
+                    <form class="m-login__form m-form mt-0" method="POST"  action="{{ route('participante.enviar-email-recuperacao') }}">
+
+                        <div class="m-alert m-alert--outline m-alert--square alert alert-info alert-dismissible fade show" role="alert" style="margin-top: 20px;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            </button>
+                            Informe o email utilizado no cadastro para recuperação de sua senha
+                        </div>
 
                         @csrf
 
@@ -56,37 +62,13 @@
                             @endif
                         </div>
 
-                        <div class="form-group m-form__group">
-                            <input class="form-control m-input m-login__form-input--last {{ $errors->has('password') ? ' is-invalid' : '' }}" type="password" placeholder="Senha" name="password" style="border-radius: 4px; background: #ecebec;">
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
+                       
 
-
-                        <div class="pt-4 pb-4">
-                            {{ Form::select('evento_id', \App\Evento::pluck('nome', 'id'), old('evento_id'), ['name' => 'evento_id','class' => 'form-control m-input m-login__form-input--last', 'id' => 'evento_id', 'placeholder'   => 'Eventos',  'required']) }}
-                            @if ($errors->has('evento_id'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('evento_id') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="row m-login__form-sub">
-                            <div class="col m--align-left m-login__form-left">
-
-                            </div>
-                            <div class="col m--align-right m-login__form-right">
-                                <a href="{{route('participante.recuperar-senha')}}" id="m_login_forget_password" class="m-link">Esqueceu a senha ?</a>
-                            </div>
-                        </div>
+                        
                         <div class="m-login__form-action">
                             <button id="m_login_signin_submit" type="submit" class="btn btn-primary m-btn  m-btn--custom m-btn--air m-login__btn m-login__btn--primary btn-block" style="background: #00710a;
  border: 1px solid #005307; ">
-                                Entrar
+                                Recuperar
                             </button>
                         </div>
 

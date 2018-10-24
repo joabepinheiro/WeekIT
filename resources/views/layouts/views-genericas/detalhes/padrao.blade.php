@@ -38,17 +38,24 @@
 
                 <table class="table m-table m-table--head-bg-success table-striped">
                     <thead>
-                                <tr>
-                                    <th>Campo</th>
-                                    <th>Valor</th>
-                                </tr>
-                            </thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                
                     @foreach($entity->getAttributes() as $key => $value)
                         <tr>
-                            <td><b>{{strtoupper(str_replace('_', ' ', $key))}}</b></td>
-                            <td>{{html_entity_decode($value)}}</td>
+                            <td><b>{{ __(strtoupper(str_replace('_', ' ', $key)))}}</b></td>
+
+                            @if (DateTime::createFromFormat('Y-m-d', $value) !== FALSE)
+                                <td>{{ \Carbon\Carbon::parse($value)->format('d/m/Y')}}</td>
+                            @elseif(DateTime::createFromFormat('Y-m-d H:i:s', $value) !== FALSE)
+                                <td>{{ \Carbon\Carbon::parse($value)->format('d/m/Y H:i:s')}}</td>
+                            @else
+                                <td>{{html_entity_decode($value)}}</td>
+                            @endif
+
                         </tr>
                     @endforeach
                      </tbody>

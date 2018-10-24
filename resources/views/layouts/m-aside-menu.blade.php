@@ -22,9 +22,6 @@
                 </a>
             </li>
 
-
-
-
             <li class="m-menu__item {{ request()->is('user/*') ? ' m-menu__item--active' : '' }}"  aria-haspopup="true">
                 <a href="{{route('user.index')}}" class="m-menu__link">
                     <span class="m-menu__item-here"></span>

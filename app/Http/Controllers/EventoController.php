@@ -22,12 +22,7 @@ class EventoController extends AbstractController
     public function store(EventoRequest $request)
     {
         $input = $request->all();
-        $ip = $request->ip();
-        $user_agent = $request->server('HTTP_USER_AGENT');
-
-        $entity = $this->model::insert($input, $ip, $user_agent);
-
-
+        $entity = $this->model::insert($input);
         $route = redirect()->route($this->base_name_route.'.show', ['id' => $entity->id]);
 
         if(!is_null($entity)){
@@ -50,5 +45,15 @@ class EventoController extends AbstractController
             return $route->with('success', $entity.'  atualizado com sucesso');
 
         return $route->with('warning', 'Ops, algo deu errado');
+    }
+
+    public function alterarEventoPadrao($id, Request $request){
+
+
+        $request->session()->put('evento_id', $id);
+
+        return json_encode(['data' => [
+            'true'
+        ]]);
     }
 }

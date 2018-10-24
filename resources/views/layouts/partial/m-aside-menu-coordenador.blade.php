@@ -93,7 +93,7 @@
                 <a  href="{{route('evento.index')}}" class="m-menu__link m-menu__toggle">
                     <span class="m-menu__item-here"></span>
                     <span class="m-menu__link-text">
-                        Eventos
+                        Atividades
                     </span>
                     <i class="m-menu__hor-arrow la la-angle-down"></i>
                     <i class="m-menu__ver-arrow la la-angle-right"></i>

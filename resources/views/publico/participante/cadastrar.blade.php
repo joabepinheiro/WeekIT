@@ -3,19 +3,21 @@
 @section('content')
     <div class="m-content">
         <div class="m-portlet m-portlet--mobile">
-            <div class="m-portlet__head">
-                <div class="m-portlet__head-caption">
-                    <div class="m-portlet__head-title">
-                        <h3 class="m-portlet__head-text">
-                            Cadastrar participante
-                            <small>
-
-                            </small>
-                        </h3>
-                    </div>
-                </div>
-            </div>
             <div class="m-portlet__body">
+                <h2 class=" text-center" style="border-bottom: 2px solid #ddd; padding-bottom: 22px;">
+                    Cadastrar participante
+                </h2>
+
+                <div class="alert m-alert--default" style="font-weight: 400;" role="alert">
+                    <h2 style="text-align: center; font-size: 18px; margin-top: 30px;">Leia antes de se cadastrar</h2>
+                    <ol style="font-size: 14px; font-weight: 400;">
+                        <li> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum varius scelerisque lacus, quis volutpat nisi dictum id.  </li>
+                        <li>Nunc faucibus massa non tortor molestie, eu dictum ex lobortis. Etiam viverra, neque quis imperdiet aliquam, nisi urna cursus lacus</li>
+                        <li>Sed tristique massa sit amet purus euismod fermentum. Proin ac ipsum et velit porttitor facilisis.</li>
+                        <li>Morbi eu euismod est. non semper nisl ligula cursus neque. Sed sed porta turpis.</li>
+                    </ol>
+                </div>
+
                 @include('layouts.partial.message')
 
                 {!! Form::open(['method' => 'POST', 'action' => '\App\Http\Controllers\Publico\ParticipanteController@store', 'class' => 'm-form m-form--fit m-form--label-align-right m-form--state block_form_submit']) !!}
@@ -87,8 +89,8 @@
                                         @endif
                                         @if(isset($value['description']))
                                             <span class="m-form__help">
-                                {{$value['description']}}
-                            </span>
+                                                {{$value['description']}}
+                                            </span>
                                         @endif
                                         @endif
                                         @if($errors->has($key))
@@ -100,10 +102,6 @@
                                     @endforeach
                         </div>
                     @endforeach
-                </div>
-
-                <div class="m-portlet__foot m-portlet__foot--fit">
-                    <div class="m-form__actions">
                         <div class="row">
                             <div class="col-lg-2"></div>
                             <div class="col-lg-10">
@@ -112,8 +110,9 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
                 </div>
+
+
                 {!! Form::close() !!}
 
             </div>

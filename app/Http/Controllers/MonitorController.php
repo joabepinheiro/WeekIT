@@ -22,10 +22,8 @@ class MonitorController extends AbstractController
     public function store(MonitorRequest $request)
     {
         $input = $request->all();
-        $ip = $request->ip();
-        $user_agent = $request->server('HTTP_USER_AGENT');
 
-        $entity = $this->model::insert($input, $ip, $user_agent);
+        $entity = $this->model::insert($input);
 
 
         $route = redirect()->route($this->base_name_route.'.show', ['id' => $entity->id]);

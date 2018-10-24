@@ -75,14 +75,14 @@ class AbstractController extends Controller
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,  $ip = null, $user_agent = null)
+    public function destroy(Request $request)
     {
         $id = $request->get('id');
         $entity = $this->model::find($id);
         $route  = redirect()->route($this->base_name_route.'.index');
 
 
-        if($this->model::destroy($id, $ip, $user_agent)){
+        if($this->model::destroy($id)){
             return $route->with('success', $entity. ' excluído com sucesso');
         }
 

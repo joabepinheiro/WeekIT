@@ -39,15 +39,19 @@ class Inscricao extends AbstractModel implements DefaultModel
                 'inscricao.status as status',
                 'inscricao.presente as presente',
                 'inscricao.participante_id as participante_id',
-                'inscricao.evento_id as evento_id',
-                'evento.titulo as evento_titulo',
+                'inscricao.atividade_id as atividade_id',
+                'atividade.titulo as atividade_titulo',
                 'participante.nome as participante_nome',
                 DB::raw('DATE_FORMAT(inscricao.created_at,"%d/%m/%Y %H:%i:%s") as created_at'),
                 DB::raw('DATE_FORMAT(inscricao.updated_at,"%d/%m/%Y %H:%i:%s") as updated_at'),
             ]);
 
-        $query->join('evento', 'evento.id','=', 'inscricao.evento_id');
+        $query->join('atividade', 'atividade.id','=', 'inscricao.atividade_id');
+        $query->join('evento', 'evento.id','=', 'atividade.evento_id');
         $query->join('participante', 'participante.id','=', 'inscricao.participante_id');
+
+
+        $query->where('evento.id', '=', Evento::eventoPadrao());
 
         if(isset($request_query['descricao'])){
             if(!empty($request_query['descricao'])){
@@ -61,9 +65,9 @@ class Inscricao extends AbstractModel implements DefaultModel
             }
         }
 
-        if(isset($request_query['evento_id'])){
-            if(!empty($request_query['evento_id'])){
-                $query->where('inscricao.evento_id', '=', $request_query['evento_id']);
+        if(isset($request_query['atividade_id'])){
+            if(!empty($request_query['atividade_id'])){
+                $query->where('inscricao.atividade_id', '=', $request_query['atividade_id']);
             }
         }
 
@@ -106,8 +110,8 @@ class Inscricao extends AbstractModel implements DefaultModel
         $columns = [
 
             [
-                'field' => 'evento_titulo',
-                'title' => 'Evento',
+                'field' => 'atividade_titulo',
+                'title' => 'Atividade',
             ],
             [
                 'field' => 'participante_nome',
@@ -130,15 +134,12 @@ class Inscricao extends AbstractModel implements DefaultModel
 
         return  [
             'fields' =>[
+
                 'participante_nome' => [
                     'type'          => 'text',
                     'placeholder'   => 'Participante',
                 ],
-                'evento_id' => [
-                    'type'          => 'select',
-                    'placeholder'   => 'Evento',
-                    'options' => Evento::pluck('titulo', 'id')
-                ],
+
 
                 'status' => [
                     'type'          => 'select',
@@ -167,11 +168,11 @@ class Inscricao extends AbstractModel implements DefaultModel
                     ],
                 ],
                 [
-                    'evento_id' => [
+                    'atividade_id' => [
                         'type'          => 'select',
-                        'options'       => Evento::select(DB::raw('CONCAT(identificador, " - ", titulo) AS titulo'), 'id')->pluck('titulo', 'id'),
-                        'label'         => 'Evento',
-                        'placeholder'   => 'Evento',
+                        'options'       => Atividade::select(DB::raw('CONCAT(identificador, " - ", titulo) AS titulo'), 'id')->pluck('titulo', 'id'),
+                        'label'         => 'Atividade',
+                        'placeholder'   => 'Atividade',
                         'required'      => 'required',
                     ],
                     'status' => [

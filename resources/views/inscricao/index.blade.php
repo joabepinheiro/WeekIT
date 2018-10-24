@@ -53,12 +53,12 @@
             var demo = function() {
 
                 var columns = [
-                    {"field":"evento_titulo","title":"Evento"},
+                    {"field":"atividade_titulo","title":"Atividade"},
                     {"field":"participante_nome","title":"Participante"},
                     {
                         "field":"status",
                         "title":"Status",
-                        width: 95,
+                        width: 135,
                         template: function(row){
 
                             if(row.status == 'cancelado'){
@@ -66,11 +66,15 @@
                             }
 
                             if(row.status == 'andamento'){
-                                return '<span class="m-badge m-badge--warning m-badge--wide" id="status-'+row.id+'" >em andamento<span>';
+                                return '<span class="m-badge m-badge--warning m-badge--wide" id="status-'+row.id+'">andamento<span>';
                             }
 
                             if(row.status == 'pago'){
                                 return '<span class="m-badge m-badge--success m-badge--wide" id="status-'+row.id+'" >pago</span>';
+                            }
+                            
+                            if(row.status == 'isento'){
+                                return '<span class="m-badge m-badge--info m-badge--wide" id="status-'+row.id+'" >isento</span>';
                             }
 
 
@@ -79,16 +83,17 @@
                     },
                     {
                         field: "alterar_para",
-                        width: 250,
+                        width: 290,
                         title: "Alterar para",
                         sortable: false,
                         overflow: 'visible',
                         template: function (row) {
 
                             return '<div class="btn-group m-btn-group" id="alterar-status" role="group" aria-label="..."> ' +
-                                    '<button type="button" class="btn btn-sm  btn-success" onclick="alterarStatus('+row.id+',\'pago\')">Pago</button> ' +
-                                    '<button type="button" class="btn btn-sm btn-danger"  onclick="alterarStatus('+row.id+', \'cancelado\')">Cancelado</button> ' +
-                                    '<button type="button" class="btn btn-sm btn-warning"  onclick="alterarStatus('+row.id+', \'andamento\')">Em andamento</button> ' +
+                                    '<button type="button" class="btn btn-sm  btn-success" title="Pagar" onclick="alterarStatus('+row.id+',\'pago\')"><i class="fa fa-money"></i></button> ' +
+                                    '<button type="button" class="btn btn-sm btn-danger" title="Cancelar" onclick="alterarStatus('+row.id+', \'cancelado\')"><i class="fa fa-close"></i></button> ' +
+                                    '<button type="button" class="btn btn-sm btn-warning" title="Em andamento" onclick="alterarStatus('+row.id+', \'andamento\')"><i class="fa fa-spinner"></i></button> ' +
+                                    '<button type="button" class="btn btn-sm btn-info"   title="Isentar"    onclick="alterarStatus('+row.id+', \'isento\')"><i class="fa fa-square"></i></button>' +
                                     '</div>';
                         }
                     },
